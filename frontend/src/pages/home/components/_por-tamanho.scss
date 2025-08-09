@@ -1,0 +1,119 @@
+@import "../../../abstract/abstract";
+
+.por-tamanho {
+    // padding: 2rem;
+    @include flex($gap: 4rem);
+    &__titulo {
+        @include flex($gap: 1.5rem);
+    }
+
+    &__h2 {
+        font-size: 1.2rem;
+        letter-spacing: 0.5rem;
+        font-weight: 400;
+    }
+
+    &__carrossel {
+        @include flex();
+        position: relative;
+        max-width: 135rem;
+        overflow: hidden;
+
+        &-container {
+            mask-image: linear-gradient(
+                to right,
+                transparent,
+                white 15%,
+                white 85%,
+                transparent
+            );
+            overflow: hidden;
+            max-width: 98dvw;
+        }
+
+        &-opcoes {
+            transform: translateX(calc(calc($tamanho-carrossel + 1rem) * -0));
+            transition: transform ease-out 0.4s;
+
+            @include flex($flow: row, $gap: 1rem, $j-content: left);
+            max-width: 133rem;
+
+            @include respond(small) {
+                max-width: 95vw;
+            }
+
+            &-container {
+                @include flex($gap: 2rem);
+                user-select: none;
+            }
+        }
+
+        &-opcao {
+            height: $tamanho-carrossel;
+            width: $tamanho-carrossel;
+
+            @include respond(small) {
+                height: $tamanho-carrossel - 2rem;
+                width: $tamanho-carrossel - 2rem;
+            }
+
+            aspect-ratio: 1/1;
+            border: 0.4rem solid rgba($cor-cinza, 0.3);
+            border-radius: 50%;
+            @include flex();
+
+            &:hover {
+                background-image: linear-gradient(white, white),
+                    linear-gradient(#f09, #ffb321);
+                background-origin: border-box;
+                background-clip: content-box, border-box;
+            }
+
+            a {
+                display: block;
+                @include flex();
+            }
+
+            img {
+                width: 95%;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+.seta {
+    @include flex();
+    font-size: 10rem;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    transition: all ease-in 0.2s;
+    background: none;
+    border: none;
+    z-index: 5;
+
+    &:disabled {
+        color: black;
+    }
+
+    &:hover {
+        font-size: 11rem;
+    }
+
+    @include respond(medium) {
+        font-size: 7rem;
+
+        &:hover {
+            font-size: 7.5rem;
+        }
+    }
+    &-esquerda {
+        left: 0%;
+        transform: translateY(-70%);
+    }
+    &-direita {
+        right: 0%;
+        transform: translateY(-70%);
+    }
+}

@@ -1,0 +1,15 @@
+@import "./../../abstract/abstract";
+// @import "../../components/produto.scss";
+.loja {
+    display: flex;
+    justify-content: center;
+    &__container {
+        max-width: 180rem;
+        width: 100%;
+        display: flex;
+        gap: 2rem;
+    }
+}
+
+// @import "./layout/filtro";
+@import "./layout/produtos";

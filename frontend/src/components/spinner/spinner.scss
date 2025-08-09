@@ -1,0 +1,31 @@
+.spinner {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    border: 9px #adadad6e solid;
+    border-top: 9px black solid;
+    left: 50%;
+    animation: spin 2s infinite linear;
+
+    &-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 15;
+        backdrop-filter: blur(10px);
+    }
+}
+
+@keyframes spin {
+    0% {
+        rotate: (0deg);
+    }
+    100% {
+        rotate: (360deg);
+    }
+}
