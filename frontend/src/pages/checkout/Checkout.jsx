@@ -174,7 +174,7 @@ function Checkout() {
                                     </div>
 
                                     <div className="checkout__endereco-cadastrado">
-                                        {infos?.enderecos?.length ? (
+                                        {infos?.enderecos ? (
                                             infos?.enderecos?.map((v, i) => (
                                                 <div key={i}>
                                                     <input
