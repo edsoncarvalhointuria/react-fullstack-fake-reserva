@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(cors({ credentials: true, origin: process.env.URL_CORS }));
 app.use(cookieParser());
 
+console.log(process.env.DATABASE_URL);
 app.get("/", (_, res) => {
     res.status(200).send("API FakeReserva está no ar!");
 });
