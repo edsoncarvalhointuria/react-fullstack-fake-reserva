@@ -27,7 +27,7 @@ const pool = new Pool({
 });
 
 app.use(express.json());
-app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(cors({ credentials: true, origin: process.env.URL_CORS }));
 app.use(cookieParser());
 
 app.post("/db/cadastrar", async (req, res) => {
