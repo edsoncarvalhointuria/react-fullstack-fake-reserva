@@ -24,6 +24,10 @@ function Checkout() {
             setTotal(await totalCarrinho(cart));
             const session = getSession();
             const { data } = await getInfos(session.session);
+            console.log("session", session.session);
+            console.log("data", data);
+            console.log("data[0]", data[0]);
+            console.log("enderecos", data[0]?.enderecos);
 
             if (data.length > 0) {
                 const infos = {
