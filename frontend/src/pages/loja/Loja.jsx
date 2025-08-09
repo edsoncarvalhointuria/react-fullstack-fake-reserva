@@ -229,6 +229,10 @@ function Loja() {
     const prods = useRef([]);
 
     useEffect(() => {
+        document.title = "FakeReserva | Loja";
+    }, []);
+
+    useEffect(() => {
         getProducts(colecao, categoria, opcao)
             .then((value) => {
                 setProduto(value.data);

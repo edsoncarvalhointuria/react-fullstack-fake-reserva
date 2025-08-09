@@ -11,6 +11,7 @@ function Home() {
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         logar();
+        document.title = "FakeReserva - Edson Carvalho Inturia";
     }, []);
     return (
         <main>

@@ -1,0 +1,66 @@
+# Nome do nosso fluxo de trabalho
+name: Deploy Frontend to GitHub Pages
+
+on:
+    # Roda sempre que você fizer um push para a branch 'main'
+    push:
+        branches: ["main"]
+
+    # Permite que você rode este fluxo manualmente pela aba Actions
+    workflow_dispatch:
+
+# Define as permissões que o nosso "robô" terá
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+jobs:
+    # O trabalho de build, que prepara o jogo
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout 🛎️
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+                  # A MÁGICA: Cacheia as dependências da pasta frontend
+                  cache-dependency-path: frontend/package-lock.json
+
+            - name: Install dependencies
+              # A MÁGICA: Diz ao robô para trabalhar DENTRO da pasta frontend
+              working-directory: ./frontend
+              run: npm install
+
+            - name: Build 🔧
+              # A MÁGICA: Roda o build também DENTRO da pasta frontend
+              working-directory: ./frontend
+              run: npm run build
+              env:
+                  # Injeta a chave secreta no processo de build
+                  VITE_LINK_API: ${{ secrets.VITE_LINK_API }}
+
+            - name: Setup Pages
+              uses: actions/configure-pages@v4
+
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                  # Faz o upload da pasta 'dist' que o Vite criou DENTRO do frontend
+                  path: "./frontend/dist"
+
+    # O trabalho de deploy, que coloca o jogo no ar
+    deploy:
+        needs: build # Só roda DEPOIS que o 'build' terminar com sucesso
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Deploy to GitHub Pages 🚀
+              id: deployment
+              uses: actions/deploy-pages@v4

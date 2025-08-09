@@ -7,6 +7,7 @@ import "./meus_pedidos.scss";
 function MeusPedidos() {
     const [itens, setItens] = useState([]);
     useEffect(() => {
+        document.title = "FakeReserva | Meus Pedidos";
         meusPedidos()
             .then(({ data }) => {
                 setItens(data);

@@ -19,6 +19,7 @@ function Checkout() {
     const redirect = useNavigate();
 
     useEffect(() => {
+        document.title = "FakeReserva | Checkout";
         (async () => {
             setTotal(await totalCarrinho(cart));
             const session = getSession();

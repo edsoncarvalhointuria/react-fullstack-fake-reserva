@@ -15,6 +15,9 @@ function Pesquisa() {
         if (params.get("pesquisa"))
             getPesquisa(params.get("pesquisa"))
                 .then((value) => {
+                    document.title = `FakeReserva | Resultados: ${params
+                        .get("pesquisa")
+                        .slice(0, 20)}`;
                     setProduto(value.data);
                     prods.current = value.data;
                 })

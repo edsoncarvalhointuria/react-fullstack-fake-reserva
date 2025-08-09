@@ -7,6 +7,9 @@ import { atualizarDados } from "../../context/api";
 function MinhaConta() {
     const { user, setUser } = useLoginContext();
     useEffect(() => {
+        document.title = "FakeReserva | Minha Conta";
+    }, []);
+    useEffect(() => {
         (async () => {
             const { data } = await getDados();
             if (data[0]) {

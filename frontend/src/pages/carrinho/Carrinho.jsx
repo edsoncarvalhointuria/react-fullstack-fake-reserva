@@ -20,6 +20,10 @@ function Carrinho() {
     const qtd = qtdCarrinho(cart);
 
     useEffect(() => {
+        document.title = "FakeReserva | Carrinho";
+    }, []);
+
+    useEffect(() => {
         (async () => {
             const t = isCupom ? isCupom : 0;
 
