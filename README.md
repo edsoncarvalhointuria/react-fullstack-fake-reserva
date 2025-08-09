@@ -9,7 +9,9 @@ Este projeto é uma simulação de e-commerce full-stack, inspirado no design e 
 Toda a arquitetura, desde a renderização no cliente até a persistência de dados, foi implementada para demonstrar habilidades em tecnologias de ponta e criar uma experiência de compra fluida e funcional.
 
 📌 **Acesse a versão ao vivo:** [https://edsoncarvalhointuria.github.io/react-fullstack-fake-reserva/](https://edsoncarvalhointuria.github.io/react-fullstack-fake-reserva/)
+
 **Login**: teste@teste.com
+
 **Senha**: 123123
 
 ---

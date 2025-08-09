@@ -174,34 +174,35 @@ function Checkout() {
                                     </div>
 
                                     <div className="checkout__endereco-cadastrado">
-                                        {infos.enderecos.map((v, i) => (
-                                            <div key={i}>
-                                                <input
-                                                    type="radio"
-                                                    name="enderecoAll"
-                                                    value={`endereco-${i}`}
-                                                    onChange={() => {
-                                                        Object.keys(v).forEach(
-                                                            (key) => {
+                                        {infos.enderecos.length ? (
+                                            infos?.enderecos?.map((v, i) => (
+                                                <div key={i}>
+                                                    <input
+                                                        type="radio"
+                                                        name="enderecoAll"
+                                                        value={`endereco-${i}`}
+                                                        onChange={() => {
+                                                            Object.keys(
+                                                                v
+                                                            ).forEach((key) => {
                                                                 if (key != "id")
                                                                     document.getElementById(
                                                                         key
                                                                     ).value =
                                                                         v[key];
-                                                            }
-                                                        );
-                                                    }}
-                                                />
-                                                <label
-                                                    htmlFor={`endereco-${i}`}
-                                                >
-                                                    {Object.keys(v).map(
-                                                        (key, ind, array) =>
-                                                            `${
-                                                                key === "id"
-                                                                    ? ""
-                                                                    : v[key]
-                                                            }
+                                                            });
+                                                        }}
+                                                    />
+                                                    <label
+                                                        htmlFor={`endereco-${i}`}
+                                                    >
+                                                        {Object.keys(v)?.map(
+                                                            (key, ind, array) =>
+                                                                `${
+                                                                    key === "id"
+                                                                        ? ""
+                                                                        : v[key]
+                                                                }
                                                             ${
                                                                 key === "id" ||
                                                                 ind ===
@@ -212,10 +213,13 @@ function Checkout() {
                                                                     : "-"
                                                             }
                                                             `
-                                                    )}
-                                                </label>
-                                            </div>
-                                        ))}
+                                                        )}
+                                                    </label>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <></>
+                                        )}
                                     </div>
                                 </div>
 
