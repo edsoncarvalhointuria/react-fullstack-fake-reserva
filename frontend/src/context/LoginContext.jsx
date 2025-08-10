@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { createContext, useContext } from "react";
-import { verLogin } from "./api";
+import { getCarrinho, verLogin } from "./api";
+import { useCarrinhoContext } from "./CarrinhoContext";
 
 const context = createContext(null);
 
 export const useLoginContext = () => useContext(context);
 
 function ContextProviderLogin({ children }) {
+    const { setCarrinho } = useCarrinhoContext();
     const [isLogin, setLogin] = useState(false);
     const [user, setUser] = useState("");
     const logar = () => {
@@ -18,6 +20,9 @@ function ContextProviderLogin({ children }) {
                 if (data?.login) {
                     setLogin(true);
                     setUser({ nome: data.nome, email: data.email });
+                    getCarrinho().then(({ data }) =>
+                        setCarrinho((v) => ({ ...data, ...v }))
+                    );
                 }
             })
             .catch(() => {

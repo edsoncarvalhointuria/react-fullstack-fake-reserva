@@ -109,12 +109,15 @@ function Carrinho() {
                                         .trim();
 
                                     setNewCupom(cupom)
-                                        .then((data) => {
-                                            if (data.data) {
+                                        .then(({ data }) => {
+                                            if (data) {
                                                 e.target.classList.remove(
                                                     "carrinho__finalizar-form-cupom-erro"
                                                 );
-                                                setCupom(data.data.desconto);
+                                                e.target.classList.add(
+                                                    "carrinho__finalizar-form-cupom-valido"
+                                                );
+                                                setCupom(data.desconto);
                                             } else {
                                                 e.target.classList.add(
                                                     "carrinho__finalizar-form-cupom-erro"

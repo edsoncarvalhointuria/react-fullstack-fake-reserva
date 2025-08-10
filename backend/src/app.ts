@@ -981,6 +981,44 @@ app.post("/db/check-session", (req, res) => {
     });
 });
 
+app.post("/db/set-carrinho", (req, res) => {
+    const { carrinho } = req.body;
+    const token = req?.cookies?.authToken;
+
+    if (token) {
+        const decode = jwt.verify(token, KEY) as jwt.JwtPayload;
+        tryExec(res, async () => {
+            await pool.query(
+                `INSERT INTO carrinhos(id, carrinhoObj) 
+                    VALUES($1, $2)
+                    ON CONFLICT (id) 
+                    DO UPDATE SET carrinhoObj = $2`,
+                [decode.login, JSON.stringify(carrinho)]
+            );
+
+            res.status(200).send({ message: "Carrinho salvo" });
+        });
+    } else res.status(200).send({ message: "usuário deslogado" });
+});
+
+app.get("/db/get-carrinho", (req, res) => {
+    const token = req?.cookies?.authToken;
+    tryExec(res, async () => {
+        if (token) {
+            const decode = jwt.verify(token, KEY) as jwt.JwtPayload;
+            const { rows } = await pool.query(
+                `
+                SELECT carrinhoObj FROM carrinhos WHERE id = $1
+                `,
+                [decode.login]
+            );
+
+            if (rows.length) res.status(200).send(rows[0]?.carrinhoObj);
+            else res.status(200).send({});
+        } else res.status(200).send({});
+    });
+});
+
 app.post("/db/finalizar-compra", (req, res) => {
     const { form, cart, session } = req.body;
     const token = req?.cookies?.authToken;

@@ -73,3 +73,9 @@ export const meusPedidos = () =>
 
 export const pedido = (order) =>
     api.get(`/db/meus-pedidos/${order}`, { withCredentials: true });
+
+export const getCarrinho = () =>
+    api.get(`/db/get-carrinho`, { withCredentials: true });
+
+export const updateCarrinho = (carrinho) =>
+    api.post(`/db/set-carrinho`, { carrinho }, { withCredentials: true });

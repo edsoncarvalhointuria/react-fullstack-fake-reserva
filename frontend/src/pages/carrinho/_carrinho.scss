@@ -372,6 +372,11 @@
                     box-shadow: 0 0 3px 2px #ff0000a3;
                 }
             }
+            &-cupom-valido {
+                & input {
+                    box-shadow: 0 0 3px 2px #33ff00a3;
+                }
+            }
 
             input {
                 font-size: 1.3rem;

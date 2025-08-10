@@ -11,7 +11,7 @@ import { useLoginContext } from "../../context/LoginContext";
 import "./_checkout.scss";
 
 function Checkout() {
-    const [infos, setDatas] = useState({ email: "", enderecos: [] });
+    const [infos, setInfos] = useState({ email: "", enderecos: [] });
     const [total, setTotal] = useState(0);
     const { cart, setCarrinho } = useCarrinhoContext();
     const { isLogin } = useLoginContext();
@@ -24,20 +24,15 @@ function Checkout() {
             setTotal(await totalCarrinho(cart));
             const session = getSession();
             const { data } = await getInfos(session.session);
-            console.log("session", session.session);
-            console.log("data", data);
-            console.log("data[0]", data[0]);
-            console.log("enderecos", data[0]?.enderecos);
 
             if (data.length > 0) {
                 const infos = {
                     ...data[0],
                     enderecos: data[0].enderecos,
                 };
-                setDatas(infos);
+                setInfos(infos);
             }
         })();
-        setDatas(getSession());
     }, []);
 
     return (
@@ -70,6 +65,10 @@ function Checkout() {
                                         });
                                         if (data) {
                                             setCarrinho({});
+                                            localStorage.setItem(
+                                                "carrinho",
+                                                JSON.stringify({})
+                                            );
                                             redirect("/");
                                         }
                                     })();

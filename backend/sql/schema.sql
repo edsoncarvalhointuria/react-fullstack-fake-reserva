@@ -178,3 +178,9 @@ ADD CONSTRAINT banners_fk_colecao_categoria FOREIGN KEY(fk_colecao_categoria) RE
 
 ALTER TABLE banners_destaque
 ADD CONSTRAINT banners_destaque_fk_colecao_categoria FOREIGN KEY(fk_colecao_categoria) REFERENCES colecao_categoria(id);
+
+CREATE TABLE IF NOT EXISTS carrinhos(
+    id TEXT PRIMARY KEY NOT NULL,
+    carrinhoObj JSONB NOT NULL,
+    ultima_atualizacao TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+)

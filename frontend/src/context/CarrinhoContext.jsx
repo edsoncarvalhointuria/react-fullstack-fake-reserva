@@ -1,5 +1,5 @@
 import { useContext, createContext, useState } from "react";
-import { getPrice, getCashback } from "./api";
+import { getPrice, getCashback, updateCarrinho } from "./api";
 import { listaProdutos } from "../pages/loja/Loja";
 
 const context = createContext(null);
@@ -63,6 +63,7 @@ function ContextProviderCarrinho({ children }) {
 
         setCarrinho(itens);
         localStorage.setItem("carrinho", JSON.stringify(itens));
+        updateCarrinho(itens);
     }
 
     function subProduto(id, tamanho, cor) {
@@ -75,7 +76,7 @@ function ContextProviderCarrinho({ children }) {
             }
         });
 
-        const clearItens = Object.keys(itens).reduce((prev, current) => {
+        let clearItens = Object.keys(itens).reduce((prev, current) => {
             if (itens[current].length)
                 prev = { ...prev, [current]: itens[current] };
             return prev;
@@ -83,6 +84,7 @@ function ContextProviderCarrinho({ children }) {
 
         setCarrinho(clearItens);
         localStorage.setItem("carrinho", JSON.stringify(clearItens));
+        updateCarrinho(itens);
     }
 
     function delProduto(id, tamanho, cor) {
