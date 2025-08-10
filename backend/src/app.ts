@@ -933,32 +933,50 @@ app.post("/db/set-session", (req, res) => {
 
 app.post("/db/check-session", (req, res) => {
     const { session } = req.body;
+    const token = req?.cookies?.authToken;
 
     tryExec(res, async () => {
-        const { rows } = await pool.query(
-            `
+        if (token) {
+            const decode = jwt.verify(token, KEY) as jwt.JwtPayload;
+            const email = decode.login;
+
+            const { rows } = await pool.query(
+                `
+                    SELECT
+                        id
+                    FROM
+                        sessions
+                    WHERE email = $1
+                    `,
+                [email]
+            );
+            res.status(200).send({ session: rows[0].id });
+        } else {
+            const { rows } = await pool.query(
+                `
             SELECT
                 *
             FROM
                 sessions
             WHERE id = $1
             `,
-            [session]
-        );
+                [session]
+            );
 
-        if (rows.length)
-            res.status(200).send({ message: "session cadastrado" });
-        else {
-            await pool.query(
-                `
+            if (rows.length)
+                res.status(200).send({ message: "session já cadastrada" });
+            else {
+                await pool.query(
+                    `
                     INSERT INTO sessions(id)
                         VALUES
                             ($1);
                     `,
-                [session]
-            );
+                    [session]
+                );
 
-            res.status(200).send({ status: "ok" });
+                res.status(200).send({ status: "nova session cadastrada" });
+            }
         }
     });
 });

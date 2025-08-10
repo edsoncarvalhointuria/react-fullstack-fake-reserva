@@ -15,6 +15,8 @@ function Header() {
     const local = useLocation();
 
     useEffect(() => {
+        // console.log(cart);
+
         getHeader()
             .then(({ data }) => setMenu(data))
             .catch((e) => console.log(e));

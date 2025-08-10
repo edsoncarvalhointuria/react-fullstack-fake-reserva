@@ -9,16 +9,22 @@ export function createSession() {
 }
 
 export function checkSession() {
-    if (localStorage.getItem("session")) {
-        try {
-            const session = JSON.parse(localStorage.getItem("session"));
-            check_session(session);
-        } catch {
-            createSession();
-        }
-    } else {
-        createSession();
-    }
+    check_session("asda")
+        .then(({ data }) => {
+            if (data?.session) {
+                localStorage.setItem("session", JSON.stringify(data));
+            } else if (localStorage.getItem("session")) {
+                try {
+                    const session = JSON.parse(localStorage.getItem("session"));
+                    check_session(session.session);
+                } catch {
+                    createSession();
+                }
+            } else {
+                createSession();
+            }
+        })
+        .catch((v) => console.log(v));
 }
 
 export function getSession() {

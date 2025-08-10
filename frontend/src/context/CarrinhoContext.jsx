@@ -75,8 +75,14 @@ function ContextProviderCarrinho({ children }) {
             }
         });
 
-        setCarrinho(itens);
-        localStorage.setItem("carrinho", JSON.stringify(itens));
+        const clearItens = Object.keys(itens).reduce((prev, current) => {
+            if (itens[current].length)
+                prev = { ...prev, [current]: itens[current] };
+            return prev;
+        }, {});
+
+        setCarrinho(clearItens);
+        localStorage.setItem("carrinho", JSON.stringify(clearItens));
     }
 
     function delProduto(id, tamanho, cor) {

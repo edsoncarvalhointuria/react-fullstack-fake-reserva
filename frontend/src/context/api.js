@@ -44,7 +44,7 @@ export const setSession = (session) =>
     api.post(`/db/set-session`, { ...session });
 
 export const check_session = (session) =>
-    api.post(`/db/check-session`, { ...session });
+    api.post(`/db/check-session`, { ...session }, { withCredentials: true });
 
 export const finalizarCompra = (object) =>
     api.post(`/db/finalizar-compra`, object, { withCredentials: true });
