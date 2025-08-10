@@ -112,6 +112,8 @@ function Hero() {
                 });
                 document.addEventListener("touchend", end);
             });
+
+            location.reload();
         })();
     }, []);
 

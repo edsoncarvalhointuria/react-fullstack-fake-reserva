@@ -7,7 +7,7 @@ function HeroItem({ img, nome, colecao_slug, categoria_slug }) {
             to={`/loja/${colecao_slug}/${categoria_slug}`}
             className={home["hero-mob__imagem"]}
         >
-            <img src={img} alt={nome} />
+            <img loading="lazy" src={img} alt={nome} />
         </Link>
     );
 }
