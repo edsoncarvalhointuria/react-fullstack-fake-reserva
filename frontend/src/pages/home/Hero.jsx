@@ -111,8 +111,6 @@ function Hero() {
                     passive: false,
                 });
                 document.addEventListener("touchend", end);
-
-                location.reload();
             });
         })();
     }, []);
