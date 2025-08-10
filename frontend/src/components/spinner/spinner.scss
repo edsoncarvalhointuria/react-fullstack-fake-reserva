@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
 .spinner {
     height: 6rem;
     width: 6rem;
@@ -9,9 +10,13 @@
 
     &-div {
         display: flex;
+        flex-direction: column;
+        gap: 1rem;
         align-items: center;
         justify-content: center;
         position: fixed;
+        font-family: "Share Tech Mono", monospace;
+        font-weight: bold;
         top: 0;
         right: 0;
         left: 0;

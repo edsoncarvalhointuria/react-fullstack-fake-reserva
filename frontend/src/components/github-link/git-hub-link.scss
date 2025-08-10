@@ -1,0 +1,53 @@
+$cor-inicial: rgba(0, 0, 0, 0.3);
+$cor-final: rgba(0, 255, 255, 0.4);
+
+.github-link {
+    position: fixed;
+    width: 6rem;
+    z-index: 150;
+    left: -5.5rem;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+    & img {
+        width: 100%;
+    }
+
+    &--seta {
+        width: 0;
+        height: 0;
+        border-top: 3rem solid transparent;
+        border-bottom: 3rem solid transparent;
+        border-left: 1rem solid $cor-inicial;
+        transition: all 1s ease-in;
+    }
+
+    &--link {
+        min-width: 6rem;
+        background: $cor-inicial;
+        cursor: pointer;
+        z-index: 2;
+        transition: all 1s ease-in;
+    }
+
+    &--show {
+        left: 0;
+
+        & .github-link--link {
+            background: $cor-final;
+        }
+        & .github-link--seta {
+            border-left: 1rem solid $cor-final;
+        }
+    }
+
+    &--invisible-click {
+        min-width: 8rem;
+        min-height: 100%;
+        transform: translateX(50%);
+        right: 0;
+        position: absolute;
+    }
+}

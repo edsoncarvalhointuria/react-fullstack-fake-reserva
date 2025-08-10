@@ -17,6 +17,7 @@ import MeusPedidosDetalhes from "./pages/meus_pedidos/MeusPedidosDetalhes";
 import NotFound from "./pages/notfound/NotFound";
 import { checkSession } from "./context/session";
 import { useLoginContext } from "./context/LoginContext";
+import GitHubLink from "./components/github-link/GitHubLink";
 
 function App() {
     const location = useLocation();
@@ -80,6 +81,7 @@ function App() {
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer />
+            <GitHubLink />
         </>
     );
 }
