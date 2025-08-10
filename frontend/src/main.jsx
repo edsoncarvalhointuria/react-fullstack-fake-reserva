@@ -8,10 +8,10 @@ import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
     <HashRouter>
-        <ContextProviderCarrinho>
-            <ContextProviderLogin>
+        <ContextProviderLogin>
+            <ContextProviderCarrinho>
                 <App />
-            </ContextProviderLogin>
-        </ContextProviderCarrinho>
+            </ContextProviderCarrinho>
+        </ContextProviderLogin>
     </HashRouter>
 );

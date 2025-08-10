@@ -1,6 +1,7 @@
 import { useContext, createContext, useState } from "react";
-import { getPrice, getCashback, updateCarrinho } from "./api";
+import { getPrice, getCashback, updateCarrinho, getCarrinho } from "./api";
 import { listaProdutos } from "../pages/loja/Loja";
+import { useLoginContext } from "./LoginContext";
 
 const context = createContext(null);
 
@@ -37,6 +38,7 @@ export async function cashbackCarrinho(carrinhoObject) {
 }
 
 function ContextProviderCarrinho({ children }) {
+    const { isLogin } = useLoginContext();
     let carrinho;
     try {
         carrinho = JSON.parse(localStorage.getItem("carrinho")) ?? {};
@@ -45,6 +47,10 @@ function ContextProviderCarrinho({ children }) {
     }
 
     const [cart, setCarrinho] = useState(carrinho);
+    if (isLogin)
+        getCarrinho().then(({ data }) =>
+            setCarrinho((v) => ({ ...data, ...v }))
+        );
 
     function addProduto(id, tamanho, cor) {
         const itens = { ...cart };
@@ -63,7 +69,7 @@ function ContextProviderCarrinho({ children }) {
 
         setCarrinho(itens);
         localStorage.setItem("carrinho", JSON.stringify(itens));
-        updateCarrinho(itens);
+        if (isLogin) updateCarrinho(itens);
     }
 
     function subProduto(id, tamanho, cor) {
@@ -76,7 +82,7 @@ function ContextProviderCarrinho({ children }) {
             }
         });
 
-        let clearItens = Object.keys(itens).reduce((prev, current) => {
+        const clearItens = Object.keys(itens).reduce((prev, current) => {
             if (itens[current].length)
                 prev = { ...prev, [current]: itens[current] };
             return prev;
@@ -84,7 +90,7 @@ function ContextProviderCarrinho({ children }) {
 
         setCarrinho(clearItens);
         localStorage.setItem("carrinho", JSON.stringify(clearItens));
-        updateCarrinho(itens);
+        if (isLogin) updateCarrinho(itens);
     }
 
     function delProduto(id, tamanho, cor) {
@@ -98,6 +104,7 @@ function ContextProviderCarrinho({ children }) {
 
         setCarrinho(itens);
         localStorage.setItem("carrinho", JSON.stringify(itens));
+        if (isLogin) updateCarrinho(itens);
     }
 
     return (
