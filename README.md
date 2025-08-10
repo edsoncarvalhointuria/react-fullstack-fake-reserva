@@ -1,5 +1,8 @@
 # 🐦 FakeReserva (E-commerce Full-Stack)
 
+![Adobe Express - 0810(2)](https://github.com/user-attachments/assets/e1e3a277-466b-467b-a2c1-c357aad753d1)
+
+
 ---
 
 ### ✨ Sobre o Projeto
