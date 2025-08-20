@@ -9,6 +9,11 @@ import { useLoginContext } from "../../context/LoginContext";
 function Home() {
     const { logar } = useLoginContext();
     const [isLoading, setLoading] = useState(true);
+    const [key, setKey] = useState(0);
+
+    useEffect(() => {
+        if (!isLoading) setKey((v) => v + 1);
+    }, [isLoading]);
     useEffect(() => {
         logar();
         document.title = "FakeReserva - Edson Carvalho Inturia";
@@ -16,7 +21,7 @@ function Home() {
     return (
         <main>
             {isLoading ? <Spinner /> : <></>}
-            <Hero />
+            <Hero key={key} />
 
             <PorTamanho setLoading={setLoading} />
 
